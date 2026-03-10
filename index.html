@@ -8,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
 
     <script>
         tailwind.config = {
@@ -129,6 +130,61 @@
             box-shadow: 0 5px 20px rgba(225, 48, 48, 0.5);
         }
 
+        /* ===== MODAL ===== */
+        .modal-overlay {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(4px);
+        }
+        .modal-content {
+            background: linear-gradient(145deg, #13161c 0%, #0f1116 100%);
+            border: 1px solid #2d323e;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .hidden-element { display: none !important; }
+
+        /* ===== FORM INPUTS ===== */
+        .custom-input {
+            background-color: #1a1d26;
+            border: 1px solid #2d323e;
+            color: white;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        .custom-input:focus {
+            border-color: #E13030;
+            box-shadow: 0 0 0 4px rgba(225, 48, 48, 0.1);
+            outline: none;
+        }
+        .error-message-text {
+            color: #ef4444;
+            font-size: 11px;
+            margin-top: 4px;
+            display: none;
+        }
+
+        /* ===== PHONE LIBRARY DARK ===== */
+        .iti { width: 100%; }
+        .iti__country-list {
+            background-color: #1a1d26;
+            border: 1px solid #2d323e;
+            color: white;
+        }
+        .iti__country.iti__highlight { background-color: #E13030; }
+        .iti__tel-input {
+            background-color: #1a1d26 !important;
+            border: 1px solid #2d323e !important;
+            color: white !important;
+            border-radius: 0.75rem !important;
+            padding-top: 0.75rem !important;
+            padding-bottom: 0.75rem !important;
+        }
+        .iti__tel-input:focus {
+            border-color: #E13030 !important;
+            box-shadow: 0 0 0 4px rgba(225, 48, 48, 0.1) !important;
+            outline: none !important;
+        }
+
         /* ===== NUMBER CIRCLE ===== */
         .num-circle {
             width: 40px;
@@ -212,10 +268,10 @@
             </p>
 
             <!-- CTA -->
-            <a href="https://t.me/+DtserNmsSdcyZWM6" target="_blank" class="cta-btn text-lg font-bold py-4 md:py-5 px-10 md:px-16 rounded-full uppercase tracking-wide flex items-center justify-center gap-3 fade-in-up" style="animation-delay: 0.4s;">
-                <i class="fa-brands fa-telegram text-xl"></i>
+            <button onclick="openModal()" class="cta-btn text-lg font-bold py-4 md:py-5 px-10 md:px-16 rounded-full uppercase tracking-wide flex items-center justify-center gap-3 fade-in-up" style="animation-delay: 0.4s;">
+                <i class="fa-solid fa-pen text-base"></i>
                 Забронювати місце
-            </a>
+            </button>
 
             <p class="text-gray-500 text-xs mt-4 fade-in-up" style="animation-delay: 0.45s;">
                 Безкоштовно. Кількість місць обмежена.
@@ -235,11 +291,11 @@
     <section class="proof-strip w-full py-5">
         <div class="max-w-4xl mx-auto px-4 flex flex-wrap justify-center gap-6 md:gap-12 text-center">
             <div>
-                <span class="text-2xl md:text-3xl font-extrabold text-brand">100+</span>
+                <span class="text-2xl md:text-3xl font-extrabold text-brand">500+</span>
                 <p class="text-gray-500 text-xs uppercase tracking-wider mt-1">Учениць</p>
             </div>
             <div>
-                <span class="text-2xl md:text-3xl font-extrabold text-brand">3 роки</span>
+                <span class="text-2xl md:text-3xl font-extrabold text-brand">2 роки</span>
                 <p class="text-gray-500 text-xs uppercase tracking-wider mt-1">Досвіду</p>
             </div>
             <div>
@@ -447,10 +503,10 @@
             </div>
 
             <div class="flex flex-col items-center">
-                <a href="https://t.me/+DtserNmsSdcyZWM6" target="_blank" class="cta-btn text-lg font-bold py-5 px-12 md:px-16 rounded-full uppercase tracking-wide flex items-center justify-center gap-3 mb-4">
-                    <i class="fa-brands fa-telegram text-xl"></i>
-                    Забронювати місце в Telegram
-                </a>
+                <button onclick="openModal()" class="cta-btn text-lg font-bold py-5 px-12 md:px-16 rounded-full uppercase tracking-wide flex items-center justify-center gap-3 mb-4">
+                    <i class="fa-solid fa-pen text-base"></i>
+                    Забронювати місце
+                </button>
                 <p class="text-gray-500 text-xs">
                     Безкоштовно. Ефір пройде в Telegram-каналі.
                 </p>
@@ -473,20 +529,238 @@
     <!-- ==================== -->
     <!-- MOBILE FIXED BUTTON  -->
     <!-- ==================== -->
-    <a href="https://t.me/+DtserNmsSdcyZWM6" target="_blank" class="md:hidden mobile-fixed-btn bg-brand hover:bg-brand-hover text-white text-base font-bold py-4 rounded-xl uppercase tracking-wide flex justify-center items-center gap-2">
-        <i class="fa-brands fa-telegram text-lg"></i>
+    <button onclick="openModal()" class="md:hidden mobile-fixed-btn bg-brand hover:bg-brand-hover text-white text-base font-bold py-4 rounded-xl uppercase tracking-wide flex justify-center items-center gap-2">
+        <i class="fa-solid fa-pen text-sm"></i>
         Забронювати місце
-    </a>
+    </button>
 
     <!-- Extra space for mobile fixed button -->
     <div class="md:hidden h-20"></div>
 
 
     <!-- ==================== -->
-    <!-- SCROLL ANIMATIONS    -->
+    <!-- MODAL FORM (POPUP)   -->
     <!-- ==================== -->
+    <div id="order-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center px-4 modal-overlay transition-opacity duration-300">
+        <div class="modal-content w-full max-w-md rounded-3xl p-6 relative fade-in-up">
+            
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
+                <i class="fa-solid fa-xmark text-2xl"></i>
+            </button>
+
+            <h2 class="text-2xl font-bold text-white mb-2 text-center uppercase">Забронювати місце</h2>
+            <p class="text-gray-400 mb-6 text-center text-xs">Залиш свої дані — і отримай нагадування про ефір</p>
+
+            <form id="order-form" class="space-y-4">
+                <input type="hidden" name="sheet_name" value="EFIR">
+
+                <!-- ІМ'Я -->
+                <div>
+                    <label class="block text-gray-500 text-xs font-bold uppercase tracking-wider mb-2 ml-1">Ваше Ім'я</label>
+                    <input type="text" id="user_name" name="name" placeholder="Олена" class="custom-input rounded-xl py-3 pl-4 pr-4 placeholder-gray-600">
+                    <p id="error-name" class="error-message-text">Будь ласка, введіть ім'я</p>
+                </div>
+
+                <!-- ТЕЛЕФОН -->
+                <div>
+                    <label class="block text-gray-500 text-xs font-bold uppercase tracking-wider mb-2 ml-1">Телефон</label>
+                    <input type="tel" id="phone" name="phone" class="custom-input rounded-xl py-3 placeholder-gray-600">
+                    <input type="hidden" name="full_phone" id="full_phone">
+                    <p id="error-phone" class="error-message-text">Невірний формат номеру</p>
+                </div>
+
+                <!-- TELEGRAM -->
+                <div>
+                    <label class="block text-gray-500 text-xs font-bold uppercase tracking-wider mb-2 ml-1">Ваш Telegram</label>
+                    <input type="text" id="user_telegram" name="telegram" placeholder="@username" class="custom-input rounded-xl py-3 pl-4 pr-4 placeholder-gray-600">
+                    <p id="error-telegram" class="error-message-text">Введіть нік Telegram</p>
+                </div>
+
+                <div class="bg-brand/5 border border-brand/20 rounded-xl p-3 flex items-center gap-3 mt-2">
+                    <i class="fa-solid fa-gift text-brand"></i>
+                    <span class="text-gray-300 text-xs">Безкоштовно. Ефір у суботу, 15 березня</span>
+                </div>
+
+                <div id="global-error" class="hidden bg-red-900/30 border border-red-500/50 rounded-lg p-2 text-center">
+                    <p class="text-red-400 text-xs font-bold uppercase">Будь ласка, виправте помилки</p>
+                </div>
+
+                <button type="submit" class="cta-btn text-lg font-bold py-4 rounded-xl uppercase tracking-wide shadow-lg w-full mt-2 flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-telegram text-xl"></i>
+                    Забронювати місце
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== -->
+    <!-- THANK YOU SCREEN      -->
+    <!-- ==================== -->
+    <div id="thank-you-screen" class="hidden-element fixed inset-0 z-[60] w-full min-h-screen flex items-center justify-center p-4 bg-dark-bg">
+        <div class="max-w-md w-full bg-dark-card border border-dark-border rounded-3xl p-8 text-center shadow-2xl fade-in-up">
+            <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-brand/10 border-2 border-brand/30 flex items-center justify-center">
+                <i class="fa-solid fa-check text-3xl text-brand"></i>
+            </div>
+            <h2 class="text-3xl font-bold text-white mb-2 uppercase">Ти в списку!</h2>
+            <p class="text-gray-400 mb-6">Місце заброньоване. Тепер підпишись на канал, щоб не пропустити ефір.</p>
+            
+            <div class="bg-[#0b0d12] rounded-xl p-5 mb-6 border border-dark-border text-left">
+                <p class="text-brand text-xs font-bold uppercase mb-2">Наступний крок:</p>
+                <p class="text-white text-sm leading-relaxed">
+                    Підпишись на Telegram-канал — саме там пройде ефір і ти отримаєш нагадування.
+                </p>
+            </div>
+
+            <a href="https://t.me/+4UwEMtrDJP03MDcy" target="_blank" class="block w-full bg-[#229ED9] hover:bg-[#1c8ec4] text-white text-lg font-bold py-4 rounded-xl shadow-lg transform hover:-translate-y-1 transition-all duration-300">
+                <i class="fa-brands fa-telegram mr-2"></i> Перейти в канал
+            </a>
+            <p class="mt-4 text-xs text-gray-500">Побачимось у суботу!</p>
+        </div>
+    </div>
+
+    <!-- ==================== -->
+    <!-- SCRIPTS              -->
+    <!-- ==================== -->
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
+
     <script>
-        // Intersection Observer for scroll animations
+        // ==========================================
+        // GOOGLE SHEETS URL
+        // ==========================================
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwcLnpNZsLJTrg6SW-N-FFWcBYCxg_aabkxhnlUy1KpIvy9jK_nHzM3LWgRzn9LwYfbvA/exec";
+        const TG_REDIRECT_URL = "https://t.me/+4UwEMtrDJP03MDcy";
+
+        // ==========================================
+        // MODAL
+        // ==========================================
+        function openModal() {
+            document.getElementById('order-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal() {
+            document.getElementById('order-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal on backdrop click
+        document.getElementById('order-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        // ==========================================
+        // PHONE LIBRARY
+        // ==========================================
+        let iti;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const phoneInput = document.querySelector("#phone");
+            iti = window.intlTelInput(phoneInput, {
+                initialCountry: "auto",
+                geoIpLookup: callback => {
+                    fetch("https://ipapi.co/json")
+                        .then(res => res.json())
+                        .then(data => callback(data.country_code))
+                        .catch(() => callback("ua"));
+                },
+                utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
+                separateDialCode: true,
+            });
+
+            // ==========================================
+            // TELEGRAM @ AUTO-PREFIX
+            // ==========================================
+            const tgInput = document.getElementById('user_telegram');
+            tgInput.addEventListener('input', function(e) {
+                let val = e.target.value;
+                if (val.length > 0 && !val.startsWith('@')) {
+                    e.target.value = '@' + val;
+                }
+            });
+
+            // ==========================================
+            // FORM SUBMIT
+            // ==========================================
+            document.getElementById('order-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Reset errors
+                document.querySelectorAll('.error-message-text').forEach(el => el.style.display = 'none');
+                document.getElementById('global-error').classList.add('hidden');
+                let hasError = false;
+
+                // Validate name
+                const name = document.getElementById('user_name').value.trim();
+                if (!name || /\d/.test(name)) {
+                    document.getElementById('error-name').style.display = 'block';
+                    hasError = true;
+                }
+
+                // Validate phone
+                if (iti) {
+                    const fullPhone = iti.getNumber();
+                    document.getElementById('full_phone').value = fullPhone;
+                    if (!iti.isValidNumber()) {
+                        document.getElementById('error-phone').style.display = 'block';
+                        hasError = true;
+                    }
+                }
+
+                // Validate telegram
+                const tg = document.getElementById('user_telegram').value.trim();
+                if (!tg || tg.length < 3) {
+                    document.getElementById('error-telegram').style.display = 'block';
+                    hasError = true;
+                }
+
+                if (hasError) {
+                    document.getElementById('global-error').classList.remove('hidden');
+                    return;
+                }
+
+                // Disable button
+                const btn = this.querySelector('button[type="submit"]');
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Відправка...';
+                btn.classList.add('opacity-75');
+
+                // Collect form data
+                const formData = new FormData(this);
+
+                // Send to Google Sheets
+                if (GOOGLE_SCRIPT_URL) {
+                    fetch(GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        body: formData,
+                        mode: 'no-cors'
+                    })
+                    .then(() => {
+                        console.log("Заявка відправлена в Google Sheets");
+                        showThankYou();
+                    })
+                    .catch((err) => {
+                        console.error("Помилка:", err);
+                        showThankYou();
+                    });
+                } else {
+                    showThankYou();
+                }
+            });
+        });
+
+        // ==========================================
+        // THANK YOU SCREEN
+        // ==========================================
+        function showThankYou() {
+            closeModal();
+            setTimeout(() => {
+                document.getElementById('thank-you-screen').classList.remove('hidden-element');
+                document.body.style.overflow = 'hidden';
+            }, 300);
+        }
+
+        // ==========================================
+        // SCROLL ANIMATIONS
+        // ==========================================
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -501,9 +775,7 @@
             });
         }, observerOptions);
 
-        // Pause animations until in view (except hero which should play immediately)
-        document.querySelectorAll('.fade-in-up, .fade-in-left').forEach((el, i) => {
-            // Skip hero elements (first few)
+        document.querySelectorAll('.fade-in-up, .fade-in-left').forEach((el) => {
             if (el.closest('header')) return;
             el.style.animationPlayState = 'paused';
             observer.observe(el);
