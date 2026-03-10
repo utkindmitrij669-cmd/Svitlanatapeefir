@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5 помилок, які старять обличчя — Безкоштовний ефір</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { DEFAULT: '#E13030', hover: '#b91c1c' },
+                        dark: { bg: '#0b0d12', card: '#13161c', border: '#2d323e' }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #0b0d12;
+            color: #ffffff;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in-left {
+            animation: fadeInLeft 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+        @keyframes fadeInLeft {
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* ===== HERO BG ===== */
+        .hero-section {
+            position: relative;
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(225, 48, 48, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(225, 48, 48, 0.05) 0%, transparent 50%),
+                linear-gradient(180deg, #0b0d12 0%, #10131a 50%, #0b0d12 100%);
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        /* ===== GLOW LINE ===== */
+        .glow-line {
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, #E13030 50%, transparent 100%);
+            opacity: 0.6;
+        }
+
+        /* ===== CTA BUTTON ===== */
+        .cta-btn {
+            background: linear-gradient(135deg, #E13030 0%, #c41f1f 100%);
+            color: white;
+            box-shadow: 0 8px 32px rgba(225, 48, 48, 0.4);
+            transition: all 0.3s ease;
+        }
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(225, 48, 48, 0.5);
+        }
+        .cta-btn:active {
+            transform: scale(0.97);
+        }
+
+        /* ===== PULSE ===== */
+        .pulse-dot {
+            animation: pulseDot 2s infinite;
+        }
+        @keyframes pulseDot {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(225, 48, 48, 0.6); }
+            50% { box-shadow: 0 0 0 10px rgba(225, 48, 48, 0); }
+        }
+
+        /* ===== CARDS ===== */
+        .mistake-card {
+            background: linear-gradient(145deg, #13161c 0%, #0f1116 100%);
+            border: 1px solid #2d323e;
+            transition: all 0.3s ease;
+        }
+        .mistake-card:hover {
+            border-color: rgba(225, 48, 48, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .for-whom-item {
+            background: linear-gradient(145deg, #13161c 0%, #0f1116 100%);
+            border-left: 3px solid #E13030;
+        }
+
+        /* ===== COUNTDOWN ===== */
+        .countdown-box {
+            background: rgba(225, 48, 48, 0.08);
+            border: 1px solid rgba(225, 48, 48, 0.2);
+        }
+
+        /* ===== MOBILE FIXED BTN ===== */
+        .mobile-fixed-btn {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 94%;
+            z-index: 50;
+            box-shadow: 0 5px 20px rgba(225, 48, 48, 0.5);
+        }
+
+        /* ===== NUMBER CIRCLE ===== */
+        .num-circle {
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 16px;
+        }
+
+        /* ===== PROOF STRIP ===== */
+        .proof-strip {
+            background: linear-gradient(90deg, #0b0d12 0%, #13161c 50%, #0b0d12 100%);
+            border-top: 1px solid #2d323e;
+            border-bottom: 1px solid #2d323e;
+        }
+
+        /* ===== FLOATING SHAPES ===== */
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.06;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col items-center overflow-x-hidden relative">
+
+    <!-- ==================== -->
+    <!-- HERO SECTION         -->
+    <!-- ==================== -->
+    <header class="hero-section w-full flex flex-col items-center justify-center min-h-[100dvh] md:min-h-[90vh] relative overflow-hidden">
+        
+        <!-- Floating decorative shapes -->
+        <div class="floating-shape w-96 h-96 bg-brand top-10 -left-48"></div>
+        <div class="floating-shape w-80 h-80 bg-brand bottom-20 -right-40"></div>
+
+        <div class="relative z-10 w-full max-w-4xl px-4 py-10 md:py-16 flex flex-col items-center text-center">
+
+            <!-- Badge -->
+            <div class="fade-in-up mb-6">
+                <span class="inline-flex items-center gap-2 bg-brand/10 border border-brand/30 text-brand px-5 py-2 rounded-full text-xs md:text-sm font-bold uppercase tracking-widest">
+                    <span class="w-2 h-2 bg-brand rounded-full pulse-dot"></span>
+                    Безкоштовний прямий ефір
+                </span>
+            </div>
+
+            <!-- Headline -->
+            <h1 class="text-3xl md:text-5xl lg:text-6xl font-extrabold mb-5 leading-tight fade-in-up uppercase text-white drop-shadow-xl" style="animation-delay: 0.1s;">
+                5 помилок, які <span class="text-brand">старять</span> твоє обличчя щодня
+            </h1>
+
+            <h2 class="text-lg md:text-2xl font-bold mb-6 leading-snug fade-in-up text-white/90" style="animation-delay: 0.2s;">
+                — і як це виправити <span class="text-brand">без уколів</span>
+            </h2>
+
+            <!-- Date / details -->
+            <div class="flex flex-wrap justify-center gap-3 md:gap-5 mb-8 fade-in-up" style="animation-delay: 0.3s;">
+                <div class="flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl px-4 py-2">
+                    <i class="fa-regular fa-calendar text-brand text-sm"></i>
+                    <span class="text-sm font-semibold text-gray-300">Субота, 15 березня</span>
+                </div>
+                <div class="flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl px-4 py-2">
+                    <i class="fa-regular fa-clock text-brand text-sm"></i>
+                    <span class="text-sm font-semibold text-gray-300">60–90 хвилин</span>
+                </div>
+                <div class="flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl px-4 py-2">
+                    <i class="fa-solid fa-video text-brand text-sm"></i>
+                    <span class="text-sm font-semibold text-gray-300">Прямий ефір</span>
+                </div>
+            </div>
+
+            <!-- Bonus line -->
+            <p class="text-gray-400 text-sm md:text-base mb-8 fade-in-up max-w-xl" style="animation-delay: 0.35s;">
+                <span class="text-white font-bold">+ Живий розбір обличчя</span> 2–3 учасниць прямо на ефірі — побачиш, як працює діагностика в реальному часі
+            </p>
+
+            <!-- CTA -->
+            <a href="https://t.me/+DtserNmsSdcyZWM6" target="_blank" class="cta-btn text-lg font-bold py-4 md:py-5 px-10 md:px-16 rounded-full uppercase tracking-wide flex items-center justify-center gap-3 fade-in-up" style="animation-delay: 0.4s;">
+                <i class="fa-brands fa-telegram text-xl"></i>
+                Забронювати місце
+            </a>
+
+            <p class="text-gray-500 text-xs mt-4 fade-in-up" style="animation-delay: 0.45s;">
+                Безкоштовно. Кількість місць обмежена.
+            </p>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 animate-bounce opacity-30">
+            <i class="fa-solid fa-chevron-down text-white text-lg"></i>
+        </div>
+    </header>
+
+
+    <!-- ==================== -->
+    <!-- PROOF STRIP          -->
+    <!-- ==================== -->
+    <section class="proof-strip w-full py-5">
+        <div class="max-w-4xl mx-auto px-4 flex flex-wrap justify-center gap-6 md:gap-12 text-center">
+            <div>
+                <span class="text-2xl md:text-3xl font-extrabold text-brand">500+</span>
+                <p class="text-gray-500 text-xs uppercase tracking-wider mt-1">Учениць</p>
+            </div>
+            <div>
+                <span class="text-2xl md:text-3xl font-extrabold text-brand">2 роки</span>
+                <p class="text-gray-500 text-xs uppercase tracking-wider mt-1">Досвіду</p>
+            </div>
+            <div>
+                <span class="text-2xl md:text-3xl font-extrabold text-brand">0 уколів</span>
+                <p class="text-gray-500 text-xs uppercase tracking-wider mt-1">Тільки природні методи</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ==================== -->
+    <!-- ДЛЯ КОГО             -->
+    <!-- ==================== -->
+    <section class="w-full max-w-4xl mx-auto px-4 py-16 md:py-20">
+        
+        <h2 class="text-2xl md:text-4xl font-extrabold text-white text-center uppercase mb-3 fade-in-up">
+            Це для <span class="text-brand">тебе</span>, якщо:
+        </h2>
+        <div class="glow-line w-20 mx-auto mb-10"></div>
+
+        <div class="space-y-4">
+            
+            <div class="for-whom-item rounded-r-xl p-5 md:p-6 flex items-start gap-4 fade-in-left" style="animation-delay: 0.1s;">
+                <i class="fa-solid fa-moon text-brand text-lg mt-1"></i>
+                <p class="text-gray-300 text-sm md:text-base leading-relaxed">
+                    <strong class="text-white">Вранці в дзеркалі — набряки, заломи і втомлений вигляд</strong>, навіть після нормального сну
+                </p>
+            </div>
+
+            <div class="for-whom-item rounded-r-xl p-5 md:p-6 flex items-start gap-4 fade-in-left" style="animation-delay: 0.2s;">
+                <i class="fa-brands fa-instagram text-brand text-lg mt-1"></i>
+                <p class="text-gray-300 text-sm md:text-base leading-relaxed">
+                    <strong class="text-white">Пробувала вправи з Instagram чи гуаша</strong>, але стабільного результату так і не отримала
+                </p>
+            </div>
+
+            <div class="for-whom-item rounded-r-xl p-5 md:p-6 flex items-start gap-4 fade-in-left" style="animation-delay: 0.3s;">
+                <i class="fa-solid fa-syringe text-brand text-lg mt-1"></i>
+                <p class="text-gray-300 text-sm md:text-base leading-relaxed">
+                    <strong class="text-white">Думала про ботокс або вже робила</strong> — але хочеш знайти природний шлях
+                </p>
+            </div>
+
+            <div class="for-whom-item rounded-r-xl p-5 md:p-6 flex items-start gap-4 fade-in-left" style="animation-delay: 0.4s;">
+                <i class="fa-solid fa-hand-holding-dollar text-brand text-lg mt-1"></i>
+                <p class="text-gray-300 text-sm md:text-base leading-relaxed">
+                    <strong class="text-white">Витрачаєш гроші на креми та сироватки</strong>, а обличчя все одно не змінюється
+                </p>
+            </div>
+
+            <div class="for-whom-item rounded-r-xl p-5 md:p-6 flex items-start gap-4 fade-in-left" style="animation-delay: 0.5s;">
+                <i class="fa-solid fa-clock text-brand text-lg mt-1"></i>
+                <p class="text-gray-300 text-sm md:text-base leading-relaxed">
+                    <strong class="text-white">Хочеш просту систему на 10 хв/день</strong>, а не хаотичний догляд без результату
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ==================== -->
+    <!-- ЩО ДІЗНАЄШСЯ         -->
+    <!-- ==================== -->
+    <section class="w-full bg-dark-card border-y border-dark-border py-16 md:py-20">
+        <div class="max-w-4xl mx-auto px-4">
+
+            <h2 class="text-2xl md:text-4xl font-extrabold text-white text-center uppercase mb-3">
+                За 60 хвилин ти <span class="text-brand">дізнаєшся</span>:
+            </h2>
+            <div class="glow-line w-20 mx-auto mb-12"></div>
+
+            <div class="space-y-5">
+
+                <!-- Mistake 1 -->
+                <div class="mistake-card rounded-2xl p-6 md:p-8 flex items-start gap-5">
+                    <div class="num-circle bg-brand text-white shrink-0">1</div>
+                    <div>
+                        <h3 class="text-white font-bold text-base md:text-lg mb-2">Чому креми і патчі не працюють</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Де насправді ховається причина зморшок і набряків — і чому боротьба з наслідками лише погіршує ситуацію</p>
+                    </div>
+                </div>
+
+                <!-- Mistake 2 -->
+                <div class="mistake-card rounded-2xl p-6 md:p-8 flex items-start gap-5">
+                    <div class="num-circle bg-brand text-white shrink-0">2</div>
+                    <div>
+                        <h3 class="text-white font-bold text-base md:text-lg mb-2">Які вправи з Instagram небезпечні</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Покажу конкретні приклади вправ, які можуть поглиблювати заломи — і одну правильну техніку, яку зробимо разом</p>
+                    </div>
+                </div>
+
+                <!-- Mistake 3 -->
+                <div class="mistake-card rounded-2xl p-6 md:p-8 flex items-start gap-5">
+                    <div class="num-circle bg-brand text-white shrink-0">3</div>
+                    <div>
+                        <h3 class="text-white font-bold text-base md:text-lg mb-2">Чому ботокс — не рішення</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Як ін'єкції «заморожують» проблему замість вирішення — і що працює краще та довше</p>
+                    </div>
+                </div>
+
+                <!-- Mistake 4 -->
+                <div class="mistake-card rounded-2xl p-6 md:p-8 flex items-start gap-5">
+                    <div class="num-circle bg-brand text-white shrink-0">4</div>
+                    <div>
+                        <h3 class="text-white font-bold text-base md:text-lg mb-2">Хаотичний догляд старить більше</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Чому 10 хвилин із системою дають більше, ніж 2 години хаотичних процедур — покажу приклад щоденної рутини</p>
+                    </div>
+                </div>
+
+                <!-- Mistake 5 -->
+                <div class="mistake-card rounded-2xl p-6 md:p-8 flex items-start gap-5">
+                    <div class="num-circle bg-brand text-white shrink-0">5</div>
+                    <div>
+                        <h3 class="text-white font-bold text-base md:text-lg mb-2">Як стрес залишається в обличчі</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Чому після стресу обличчя «постаріло на 5 років» — і як тейпування та масаж знімають напруження з м'язів</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Live review highlight -->
+            <div class="mt-10 bg-brand/5 border border-brand/20 rounded-2xl p-6 md:p-8 text-center">
+                <div class="flex items-center justify-center gap-3 mb-3">
+                    <i class="fa-solid fa-user-group text-brand text-xl"></i>
+                    <h3 class="text-white font-bold text-lg md:text-xl">+ Живий розбір обличчя учасниць</h3>
+                </div>
+                <p class="text-gray-400 text-sm md:text-base max-w-lg mx-auto">
+                    Наприкінці ефіру я розберу обличчя 2–3 учасниць у прямому ефірі: тип старіння, причини змін і що робити. Ти побачиш, як працює моя діагностика — в реальному часі.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ==================== -->
+    <!-- ХТО ВЕДЕ             -->
+    <!-- ==================== -->
+    <section class="w-full max-w-4xl mx-auto px-4 py-16 md:py-20">
+        
+        <h2 class="text-2xl md:text-4xl font-extrabold text-white text-center uppercase mb-3">
+            Ведуча ефіру
+        </h2>
+        <div class="glow-line w-20 mx-auto mb-12"></div>
+
+        <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12">
+            
+            <!-- Photo placeholder -->
+            <div class="shrink-0">
+                <div class="w-48 h-48 md:w-56 md:h-56 rounded-full border-4 border-brand/30 shadow-[0_0_40px_rgba(225,48,48,0.15)] overflow-hidden bg-dark-card flex items-center justify-center">
+                    <!-- Replace src with actual photo -->
+                    <div class="text-center">
+                        <i class="fa-solid fa-user text-5xl text-brand/30 mb-2"></i>
+                        <p class="text-gray-600 text-xs">Ваше фото</p>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-2xl md:text-3xl font-extrabold text-white mb-1">Світлана</h3>
+                <p class="text-brand font-bold text-sm uppercase tracking-wider mb-4">@svitlana_tape</p>
+                
+                <p class="text-gray-300 text-sm md:text-base leading-relaxed mb-5">
+                    Експерт з природного омолодження та тейпування обличчя. Авторка методики <strong class="text-white">«АнтиБотокс»</strong>. Допомогла сотням жінок повернути свіжість обличчя — без уколів, без дорогих процедур, у домашніх умовах.
+                </p>
+
+                <div class="flex flex-wrap gap-3">
+                    <span class="bg-white/5 border border-white/10 text-gray-300 text-xs font-semibold px-4 py-2 rounded-lg">
+                        <i class="fa-solid fa-graduation-cap text-brand mr-2"></i>500+ учениць
+                    </span>
+                    <span class="bg-white/5 border border-white/10 text-gray-300 text-xs font-semibold px-4 py-2 rounded-lg">
+                        <i class="fa-solid fa-hand-sparkles text-brand mr-2"></i>Масаж + тейпування
+                    </span>
+                    <span class="bg-white/5 border border-white/10 text-gray-300 text-xs font-semibold px-4 py-2 rounded-lg">
+                        <i class="fa-solid fa-heart text-brand mr-2"></i>Без уколів
+                    </span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ==================== -->
+    <!-- FINAL CTA            -->
+    <!-- ==================== -->
+    <section class="w-full bg-dark-card border-y border-dark-border py-16 md:py-20 relative overflow-hidden">
+        
+        <!-- BG glow -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand/5 rounded-full blur-[120px] pointer-events-none"></div>
+
+        <div class="relative z-10 max-w-3xl mx-auto px-4 text-center">
+
+            <h2 class="text-2xl md:text-4xl font-extrabold text-white uppercase mb-4">
+                Приєднуйся до ефіру <br class="md:hidden">в <span class="text-brand">суботу</span>
+            </h2>
+
+            <p class="text-gray-400 text-sm md:text-base mb-4 max-w-lg mx-auto">
+                Натисни кнопку, щоб потрапити в Telegram-канал і отримати нагадування про ефір
+            </p>
+
+            <!-- Date reminder -->
+            <div class="countdown-box inline-flex items-center gap-3 px-6 py-3 rounded-xl mb-8">
+                <i class="fa-regular fa-calendar-check text-brand"></i>
+                <span class="text-white font-bold text-sm">Субота, 15 березня</span>
+                <span class="text-gray-500">|</span>
+                <span class="text-gray-300 text-sm">Прямий ефір</span>
+            </div>
+
+            <div class="flex flex-col items-center">
+                <a href="https://t.me/+DtserNmsSdcyZWM6" target="_blank" class="cta-btn text-lg font-bold py-5 px-12 md:px-16 rounded-full uppercase tracking-wide flex items-center justify-center gap-3 mb-4">
+                    <i class="fa-brands fa-telegram text-xl"></i>
+                    Забронювати місце в Telegram
+                </a>
+                <p class="text-gray-500 text-xs">
+                    Безкоштовно. Ефір пройде в Telegram-каналі.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ==================== -->
+    <!-- FOOTER               -->
+    <!-- ==================== -->
+    <footer class="w-full py-8 text-center">
+        <p class="text-gray-600 text-xs">
+            © 2026 svitlana_tape. Усі права захищені.
+        </p>
+    </footer>
+
+
+    <!-- ==================== -->
+    <!-- MOBILE FIXED BUTTON  -->
+    <!-- ==================== -->
+    <a href="https://t.me/+DtserNmsSdcyZWM6" target="_blank" class="md:hidden mobile-fixed-btn bg-brand hover:bg-brand-hover text-white text-base font-bold py-4 rounded-xl uppercase tracking-wide flex justify-center items-center gap-2">
+        <i class="fa-brands fa-telegram text-lg"></i>
+        Забронювати місце
+    </a>
+
+    <!-- Extra space for mobile fixed button -->
+    <div class="md:hidden h-20"></div>
+
+
+    <!-- ==================== -->
+    <!-- SCROLL ANIMATIONS    -->
+    <!-- ==================== -->
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Pause animations until in view (except hero which should play immediately)
+        document.querySelectorAll('.fade-in-up, .fade-in-left').forEach((el, i) => {
+            // Skip hero elements (first few)
+            if (el.closest('header')) return;
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
+        });
+    </script>
+
+</body>
+</html>
