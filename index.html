@@ -757,15 +757,25 @@
                 btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Відправка...';
                 btn.classList.add('opacity-75');
 
-                // Collect form data
-                const formData = new FormData(this);
+                // Collect form data as URLSearchParams (Google Apps Script requires this)
+                const formData = new URLSearchParams();
+                formData.append('sheet_name', 'EFIR');
+                formData.append('name', document.getElementById('user_name').value.trim());
+                formData.append('full_phone', document.getElementById('full_phone').value);
+                formData.append('telegram', document.getElementById('user_telegram').value.trim());
+                formData.append('utm_campaign', document.getElementById('utm_campaign').value);
+                formData.append('utm_medium', document.getElementById('utm_medium').value);
+                formData.append('utm_content', document.getElementById('utm_content').value);
 
                 // Send to Google Sheets
                 if (GOOGLE_SCRIPT_URL) {
                     fetch(GOOGLE_SCRIPT_URL, {
                         method: 'POST',
                         body: formData,
-                        mode: 'no-cors'
+                        mode: 'no-cors',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        }
                     })
                     .then(() => {
                         console.log("Заявка відправлена в Google Sheets");
