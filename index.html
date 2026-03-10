@@ -5,6 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>5 помилок, які старять обличчя — Безкоштовний ефір</title>
     
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1548773689373078');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1548773689373078&ev=PageView&noscript=1"/></noscript>
+    <!-- End Meta Pixel Code -->
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -291,7 +308,7 @@
     <section class="proof-strip w-full py-5">
         <div class="max-w-4xl mx-auto px-4 flex flex-wrap justify-center gap-6 md:gap-12 text-center">
             <div>
-                <span class="text-2xl md:text-3xl font-extrabold text-brand">100+</span>
+                <span class="text-2xl md:text-3xl font-extrabold text-brand">500+</span>
                 <p class="text-gray-500 text-xs uppercase tracking-wider mt-1">Учениць</p>
             </div>
             <div>
@@ -553,6 +570,9 @@
 
             <form id="order-form" class="space-y-4">
                 <input type="hidden" name="sheet_name" value="EFIR">
+                <input type="hidden" name="utm_campaign" id="utm_campaign">
+                <input type="hidden" name="utm_medium" id="utm_medium">
+                <input type="hidden" name="utm_content" id="utm_content">
 
                 <!-- ІМ'Я -->
                 <div>
@@ -629,6 +649,20 @@
         // ==========================================
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwcLnpNZsLJTrg6SW-N-FFWcBYCxg_aabkxhnlUy1KpIvy9jK_nHzM3LWgRzn9LwYfbvA/exec";
         const TG_REDIRECT_URL = "https://t.me/+4UwEMtrDJP03MDcy";
+
+        // ==========================================
+        // UTM TRACKING
+        // ==========================================
+        (function() {
+            var params = new URLSearchParams(window.location.search);
+            var campaign = params.get('campaign_name') || params.get('utm_campaign') || '';
+            var medium = params.get('adset_name') || params.get('utm_medium') || '';
+            var content = params.get('ad_name') || params.get('utm_content') || '';
+            
+            document.getElementById('utm_campaign').value = campaign;
+            document.getElementById('utm_medium').value = medium;
+            document.getElementById('utm_content').value = content;
+        })();
 
         // ==========================================
         // MODAL
@@ -751,6 +785,10 @@
         // THANK YOU SCREEN
         // ==========================================
         function showThankYou() {
+            // Meta Pixel: трекаємо лід
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'Lead');
+            }
             closeModal();
             setTimeout(() => {
                 document.getElementById('thank-you-screen').classList.remove('hidden-element');
